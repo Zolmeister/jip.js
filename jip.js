@@ -11,25 +11,25 @@ var functions = {
         argMap[args[i]] = arg
       })
 
-      return iiApply(argMap, fn)
+      return jipApply(argMap, fn)
     }
 
     return functions[name]
   }
 }
 
-function iiApply(argMap, fn) {
-  return ii.apply(null, [fn[0]].concat(fn.slice(1).map(function (arg) {
+function jipApply(argMap, fn) {
+  return jip.apply(null, [fn[0]].concat(fn.slice(1).map(function (arg) {
     if (Array.isArray(arg)) {
-      return iiApply(argMap, arg)
+      return jipApply(argMap, arg)
     }
     return argMap[arg]
   })))
 }
 
-function ii() {
+function jip() {
   var args = Array.prototype.slice.call(arguments)
   return functions[args[0]].apply(null, args.slice(1))
 }
 
-module.exports = ii
+module.exports = jip
